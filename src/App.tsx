@@ -9,7 +9,7 @@ export default function App() {
     <>
       <header>
         <GameTitle />
-        <GameMessage />
+        <GameMessage language="lose" />
       </header>
       <main>
         <Languages />

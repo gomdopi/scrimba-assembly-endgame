@@ -37,16 +37,42 @@ body {
       color: #8e8e8e;
     }
 
-    h2 {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    div[class^="gameMessage"] {
+      align-content: center;
       height: 60px;
-      font-weight: 400;
-      font-size: 1rem;
       background-color: #7a5ea7;
       border: 1px solid #323232;
       border-radius: 4px;
+      margin-top: 15px;
+
+      h2 {
+        font-weight: 500;
+        font-size: 1.25rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      h3 {
+        font-weight: 500;
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      h4 {
+        font-weight: 400;
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    div.gameMessage-win {
+      background-color: #10a95b;
+    }
+
+    div.gameMessage-lose {
+      background-color: #ba2a2a;
     }
   }
 

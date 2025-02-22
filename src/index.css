@@ -168,7 +168,7 @@ body {
       min-width: 352px;
       max-width: 480px;
 
-      span {
+      button {
         text-align: center;
         align-content: center;
         width: 40px;
@@ -179,6 +179,14 @@ body {
         font-weight: 600;
         font-size: 1rem;
         color: #1e1e1e;
+
+        &.selected {
+          background-color: #ec5d49;
+
+          &.inRandomWord {
+            background-color: #10a95b;
+          }
+        }
       }
     }
   }

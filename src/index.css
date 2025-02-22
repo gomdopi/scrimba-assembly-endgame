@@ -61,13 +61,59 @@ body {
       justify-content: center;
       flex-wrap: wrap;
       gap: 1.5px;
-      min-width: 200px;
-      max-width: 352px;
+      min-width: 160px;
+      max-width: 300px;
 
       span {
-        background-color: #298ec6;
         padding: 4.5px;
         border-radius: 3px;
+        font-weight: 700;
+        font-size: 0.75rem;
+
+        &.html {
+          background-color: #e2680f;
+          color: #f9f4da;
+        }
+
+        &.css {
+          background-color: #328af1;
+          color: #f9f4da;
+        }
+
+        &.javascript {
+          background-color: #f4eb13;
+          color: #1e1e1e;
+        }
+
+        &.react {
+          background-color: #2ed3e9;
+          color: #1e1e1e;
+        }
+
+        &.typescript {
+          background-color: #298ec6;
+          color: #1e1e1e;
+        }
+
+        &.python {
+          background-color: #ffd742;
+          color: #282726;
+        }
+
+        &.ruby {
+          background-color: #d02b2b;
+          color: #f9f4da;
+        }
+
+        &.assembly {
+          background-color: #2d519f;
+          color: #f9f4da;
+        }
+      }
+
+      span[class="node.js"] {
+        background-color: #599137;
+        color: #f9f4da;
       }
     }
 

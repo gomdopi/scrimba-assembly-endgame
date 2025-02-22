@@ -12,7 +12,7 @@ export default function Languages() {
   ]
 
   const languagesElements = languages.map(lang => (
-    <span className={`language-${lang.toLowerCase()}`}>{lang}</span>
+    <span className={lang.toLowerCase()}>{lang}</span>
   ))
 
   return <div className="languagesContainer">{languagesElements}</div>

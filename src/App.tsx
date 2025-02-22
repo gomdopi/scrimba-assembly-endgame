@@ -1,3 +1,22 @@
+import Alphabet from "./components/Alphabet"
+import GameMessage from "./components/GameMessage"
+import GameTitle from "./components/GameTitle"
+import Languages from "./components/Languages"
+import RandomWord from "./components/RandomWord"
+
 export default function App() {
-  return <h1>Hello World</h1>
+  return (
+    <>
+      <header>
+        <GameTitle />
+        <GameMessage />
+      </header>
+      <main>
+        <Languages />
+        <RandomWord />
+        <Alphabet />
+      </main>
+      <button className="newGameButton">New Game</button>
+    </>
+  )
 }

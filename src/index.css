@@ -3,6 +3,124 @@
 }
 
 body {
-  font-family: Inter, Karla, sans-serif;
+  font-family: Hanken Grotesk, sans-serif;
   margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #282726;
+  max-width: 600px;
+  max-height: 720px;
+  padding: 50px;
+
+  header {
+    min-width: 320px;
+    max-width: 352px;
+    height: 144px;
+    margin-bottom: 40px;
+    color: #f9f4da;
+
+    text-align: center;
+
+    h1 {
+      font-weight: 500;
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+    }
+
+    span {
+      font-weight: 500;
+      font-size: 0.875rem;
+      color: #8e8e8e;
+    }
+
+    h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      font-weight: 400;
+      font-size: 1rem;
+      background-color: #7a5ea7;
+      border: 1px solid #323232;
+      border-radius: 4px;
+    }
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    .languagesContainer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5px;
+      min-width: 200px;
+      max-width: 352px;
+
+      span {
+        background-color: #298ec6;
+        padding: 4.5px;
+        border-radius: 3px;
+      }
+    }
+
+    .randomWordContainer {
+      display: flex;
+      gap: 2px;
+
+      .letter {
+        text-align: center;
+        align-content: center;
+        background-color: #323232;
+        width: 40px;
+        height: 40px;
+        font-weight: 700;
+        font-size: 1.125rem;
+        color: #f9f4da;
+        border-bottom: 1px solid #f9f4da;
+      }
+    }
+
+    .alphabetContainer {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-width: 352px;
+      max-width: 480px;
+
+      span {
+        text-align: center;
+        align-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #fcba29;
+        border: 1px solid #d7d7d7;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 1rem;
+        color: #1e1e1e;
+      }
+    }
+  }
+
+  .newGameButton {
+    width: 228px;
+    height: 40px;
+    border: 1px solid #d7d7d7;
+    border-radius: 4px;
+    background-color: #11b5e5;
+    font-family: Hanken Grotesk, sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #1e1e1e;
+    margin-top: 30px;
+  }
 }

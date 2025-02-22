@@ -3,7 +3,7 @@ export default function Alphabet() {
   const alphabetElements = alphabet
     .toUpperCase()
     .split("")
-    .map(letter => <span>{letter}</span>)
+    .map(letter => <span key={letter}>{letter}</span>)
 
   return <div className="alphabetContainer">{alphabetElements}</div>
 }

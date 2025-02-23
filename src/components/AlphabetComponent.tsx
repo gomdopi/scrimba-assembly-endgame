@@ -14,7 +14,7 @@ export default function AlphabetComponent(props: {
         onClick={() => props.onClick(alphabetLetter)}
         className={className}
       >
-        {alphabetLetter.letter.toUpperCase()}
+        {alphabetLetter.letter}
       </button>
     )
   })

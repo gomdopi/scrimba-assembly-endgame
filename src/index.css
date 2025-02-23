@@ -183,6 +183,14 @@ body {
         font-size: 1.125rem;
         color: #f9f4da;
         border-bottom: 1px solid #f9f4da;
+
+        span {
+          visibility: hidden;
+
+          &.show {
+            visibility: visible;
+          }
+        }
       }
     }
 

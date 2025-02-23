@@ -20,32 +20,32 @@ export class AlphabetLetter {
 
 export class Alphabet {
   static alphabetLetters = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
   ] as const
 
   letters: Array<AlphabetLetter>
@@ -110,7 +110,7 @@ export default function App() {
   const [snappedLanguages, setSnappedLanguages] = useState(0)
   const [languagesState, setLanguagesState] = useState(initialLanguages)
   const [randomWord, setRandomWord] = useState(
-    generate({ exactly: 1, join: "" })
+    generate({ exactly: 1, join: "" }).toUpperCase()
   )
   const [alphabetLetters, setAlphabetLetters] = useState(
     initializeAlphabet(randomWord)
@@ -125,7 +125,7 @@ export default function App() {
     )
 
   const handleNewGameClick = (): void => {
-    const newRandomWord = generate({ exactly: 1, join: "" })
+    const newRandomWord = generate({ exactly: 1, join: "" }).toUpperCase()
     setGameMessage("")
     setSnappedLanguages(0)
     setLanguagesState(initialLanguages)
@@ -166,7 +166,7 @@ export default function App() {
       </header>
       <main>
         <Languages languagesState={languagesState} />
-        <RandomWord randomWord={randomWord} />
+        <RandomWord randomWord={randomWord} alphabetLetters={alphabetLetters} />
         <AlphabetComponent
           alphabetLetters={alphabetLetters}
           onClick={handleAlphabetLetterClick}

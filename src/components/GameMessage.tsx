@@ -3,9 +3,7 @@ export default function GameMessage(props: { gameMessage: string }) {
   const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
   const languageMessage =
     props.gameMessage.length > 0
-      ? `${randomPhrase}, ${props.gameMessage[0]?.toUpperCase()}${props.gameMessage.slice(
-          1
-        )}`
+      ? `${randomPhrase}, ${props.gameMessage[0]}${props.gameMessage.slice(1)}`
       : ""
 
   const generateMessage = () => {

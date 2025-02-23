@@ -116,16 +116,25 @@ export default function App() {
     initializeAlphabet(randomWord)
   )
 
+  const endgameReached =
+    snappedLanguages === 8 ||
+    alphabetLetters.every(
+      alphabetLetter =>
+        !alphabetLetter.inRandomWord ||
+        (alphabetLetter.inRandomWord && alphabetLetter.selected)
+    )
+
   const handleNewGameClick = (): void => {
     const newRandomWord = generate({ exactly: 1, join: "" })
     setGameMessage("")
+    setSnappedLanguages(0)
     setLanguagesState(initialLanguages)
     setRandomWord(newRandomWord)
     setAlphabetLetters(initializeAlphabet(newRandomWord))
   }
 
   const handleAlphabetLetterClick = (alphabetLetter: AlphabetLetter): void => {
-    if (alphabetLetter.selected) return
+    if (alphabetLetter.selected || endgameReached) return
 
     setAlphabetLetters(prevAlphabetLetters =>
       prevAlphabetLetters.map(currAlphabetLetter =>
@@ -163,7 +172,10 @@ export default function App() {
           onClick={handleAlphabetLetterClick}
         />
       </main>
-      <button className="newGameButton" onClick={handleNewGameClick}>
+      <button
+        className={"newGameButton" + (endgameReached ? " show" : "")}
+        onClick={handleNewGameClick}
+      >
         New Game
       </button>
     </>

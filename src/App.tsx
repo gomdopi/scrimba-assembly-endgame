@@ -57,11 +57,58 @@ export class Alphabet {
   }
 }
 
+export type Language = {
+  language: string
+  snapped: boolean
+}
+
+const initialLanguages: Array<Language> = [
+  {
+    language: "HTML",
+    snapped: false,
+  },
+  {
+    language: "CSS",
+    snapped: false,
+  },
+  {
+    language: "Javascript",
+    snapped: false,
+  },
+  {
+    language: "React",
+    snapped: false,
+  },
+  {
+    language: "Typescript",
+    snapped: false,
+  },
+  {
+    language: "Node.js",
+    snapped: false,
+  },
+  {
+    language: "Python",
+    snapped: false,
+  },
+  {
+    language: "Ruby",
+    snapped: false,
+  },
+  {
+    language: "Assembly",
+    snapped: false,
+  },
+]
+
 function initializeAlphabet(randomWord: string): Array<AlphabetLetter> {
   return new Alphabet(randomWord).letters
 }
 
 export default function App() {
+  const [gameMessage, setGameMessage] = useState("")
+  const [snappedLanguages, setSnappedLanguages] = useState(0)
+  const [languagesState, setLanguagesState] = useState(initialLanguages)
   const [randomWord, setRandomWord] = useState(
     generate({ exactly: 1, join: "" })
   )
@@ -71,6 +118,8 @@ export default function App() {
 
   const handleNewGameClick = (): void => {
     const newRandomWord = generate({ exactly: 1, join: "" })
+    setGameMessage("")
+    setLanguagesState(initialLanguages)
     setRandomWord(newRandomWord)
     setAlphabetLetters(initializeAlphabet(newRandomWord))
   }
@@ -78,23 +127,34 @@ export default function App() {
   const handleAlphabetLetterClick = (alphabetLetter: AlphabetLetter): void => {
     if (alphabetLetter.selected) return
 
-    setAlphabetLetters(prevAlphabetLetters =>
-      prevAlphabetLetters.map(currAlphabetLetter =>
-        currAlphabetLetter.letter === alphabetLetter.letter
-          ? { ...currAlphabetLetter, selected: true }
-          : currAlphabetLetter
+    if (randomWord.includes(alphabetLetter.letter)) {
+      setAlphabetLetters(prevAlphabetLetters =>
+        prevAlphabetLetters.map(currAlphabetLetter =>
+          currAlphabetLetter.letter === alphabetLetter.letter
+            ? { ...currAlphabetLetter, selected: true }
+            : currAlphabetLetter
+        )
       )
-    )
+    } else {
+      const newSnappedLanguages = snappedLanguages + 1
+      setGameMessage(languagesState[snappedLanguages].language)
+      setSnappedLanguages(newSnappedLanguages)
+      setLanguagesState(prevLanguagesState =>
+        prevLanguagesState.map((language, index) =>
+          index === snappedLanguages ? { ...language, snapped: true } : language
+        )
+      )
+    }
   }
 
   return (
     <>
       <header>
         <GameTitle />
-        <GameMessage language="lose" />
+        <GameMessage gameMessage={gameMessage} />
       </header>
       <main>
-        <Languages />
+        <Languages languagesState={languagesState} />
         <RandomWord randomWord={randomWord} />
         <AlphabetComponent
           alphabetLetters={alphabetLetters}

@@ -1,8 +1,15 @@
-export default function GameMessage(props: { language: string }) {
+export default function GameMessage(props: { gameMessage: string }) {
   const phrases = ["Farewell", "It's been real", "R.I.P."]
+  const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
+  const languageMessage =
+    props.gameMessage.length > 0
+      ? `${randomPhrase}, ${props.gameMessage[0]?.toUpperCase()}${props.gameMessage.slice(
+          1
+        )}`
+      : ""
 
   const generateMessage = () => {
-    switch (props.language) {
+    switch (props.gameMessage) {
       case "win":
         return (
           <>
@@ -18,17 +25,20 @@ export default function GameMessage(props: { language: string }) {
           </>
         )
       default: {
-        const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)]
-        return (
-          <h4>{`${randomPhrase}, ${props.language[0].toUpperCase()}${props.language.slice(
-            1
-          )}`}</h4>
-        )
+        return <h4>{languageMessage}</h4>
       }
     }
   }
 
   return (
-    <div className={`gameMessage-${props.language}`}>{generateMessage()}</div>
+    <div
+      className={`${
+        languageMessage.length === 0
+          ? "hide"
+          : `gameMessage-${props.gameMessage}`
+      }`}
+    >
+      {generateMessage()}
+    </div>
   )
 }

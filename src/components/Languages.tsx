@@ -1,20 +1,20 @@
-export default function Languages() {
-  const languages = [
-    "HTML",
-    "CSS",
-    "Javascript",
-    "React",
-    "Typescript",
-    "Node.js",
-    "Python",
-    "Ruby",
-    "Assembly",
-  ]
+import { Language } from "../App"
 
-  const languagesElements = languages.map(lang => (
-    <span key={lang} className={lang.toLowerCase()}>
-      {lang}
-    </span>
+export default function Languages(props: { languagesState: Array<Language> }) {
+  const languagesElements = props.languagesState.map(language => (
+    <div>
+      <span
+        key={language.language}
+        className={
+          language.language.toLowerCase() + (language.snapped ? " snapped" : "")
+        }
+      >
+        {language.language}
+      </span>
+      <span className={"snappedIcon" + (language.snapped ? " show" : "")}>
+        💀
+      </span>
+    </div>
   ))
 
   return <div className="languagesContainer">{languagesElements}</div>

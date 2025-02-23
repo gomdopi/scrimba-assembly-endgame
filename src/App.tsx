@@ -127,14 +127,16 @@ export default function App() {
   const handleAlphabetLetterClick = (alphabetLetter: AlphabetLetter): void => {
     if (alphabetLetter.selected) return
 
-    if (randomWord.includes(alphabetLetter.letter)) {
-      setAlphabetLetters(prevAlphabetLetters =>
-        prevAlphabetLetters.map(currAlphabetLetter =>
-          currAlphabetLetter.letter === alphabetLetter.letter
-            ? { ...currAlphabetLetter, selected: true }
-            : currAlphabetLetter
-        )
+    setAlphabetLetters(prevAlphabetLetters =>
+      prevAlphabetLetters.map(currAlphabetLetter =>
+        currAlphabetLetter.letter === alphabetLetter.letter
+          ? { ...currAlphabetLetter, selected: true }
+          : currAlphabetLetter
       )
+    )
+
+    if (randomWord.includes(alphabetLetter.letter)) {
+      setGameMessage("")
     } else {
       const newSnappedLanguages = snappedLanguages + 1
       setGameMessage(languagesState[snappedLanguages].language)

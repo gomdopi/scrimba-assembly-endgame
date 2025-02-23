@@ -2,9 +2,8 @@ import { Language } from "../App"
 
 export default function Languages(props: { languagesState: Array<Language> }) {
   const languagesElements = props.languagesState.map(language => (
-    <div>
+    <div key={language.language}>
       <span
-        key={language.language}
         className={
           language.language.toLowerCase() + (language.snapped ? " snapped" : "")
         }

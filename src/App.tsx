@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { RefObject, useEffect, useRef, useState } from "react"
 import AlphabetComponent from "./components/AlphabetComponent"
 import GameMessage from "./components/GameMessage"
 import GameTitle from "./components/GameTitle"
@@ -124,6 +124,13 @@ export default function App() {
         (alphabetLetter.inRandomWord && alphabetLetter.selected)
     )
 
+  const newGameButtonRef: RefObject<HTMLButtonElement | null> = useRef(null)
+  useEffect(() => {
+    if (endgameReached) {
+      newGameButtonRef.current!.focus()
+    }
+  }, [endgameReached])
+
   const handleNewGameClick = (): void => {
     const newRandomWord = generate({ exactly: 1, join: "" }).toUpperCase()
     setGameMessage("")
@@ -173,6 +180,7 @@ export default function App() {
         />
       </main>
       <button
+        ref={newGameButtonRef}
         className={"newGameButton" + (endgameReached ? " show" : "")}
         onClick={handleNewGameClick}
       >

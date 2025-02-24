@@ -71,11 +71,11 @@ body {
       }
     }
 
-    div.gameMessage-win {
+    div.gameMessage-victory {
       background-color: #10a95b;
     }
 
-    div.gameMessage-lose {
+    div.gameMessage-loss {
       background-color: #ba2a2a;
     }
   }

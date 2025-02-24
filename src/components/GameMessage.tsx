@@ -8,14 +8,14 @@ export default function GameMessage(props: { gameMessage: string }) {
 
   const generateMessage = () => {
     switch (props.gameMessage) {
-      case "win":
+      case "victory":
         return (
           <>
             <h2>You win!</h2>
             <h3>Well done!</h3>
           </>
         )
-      case "lose":
+      case "loss":
         return (
           <>
             <h2>Game over!</h2>

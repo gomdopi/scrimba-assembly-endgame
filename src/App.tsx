@@ -127,6 +127,7 @@ export default function App() {
   const newGameButtonRef: RefObject<HTMLButtonElement | null> = useRef(null)
   useEffect(() => {
     if (endgameReached) {
+      setGameMessage(snappedLanguages === 8 ? "loss" : "victory")
       newGameButtonRef.current!.focus()
     }
   }, [endgameReached])

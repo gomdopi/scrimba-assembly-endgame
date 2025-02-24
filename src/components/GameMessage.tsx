@@ -12,14 +12,14 @@ export default function GameMessage(props: { gameMessage: string }) {
         return (
           <>
             <h2>You win!</h2>
-            <h3>Well done!</h3>
+            <h3>Well done! 🎉</h3>
           </>
         )
       case "loss":
         return (
           <>
             <h2>Game over!</h2>
-            <h3>You lose! Better start learning Assembly</h3>
+            <h3>You lose! Better start learning Assembly 😭</h3>
           </>
         )
       default: {

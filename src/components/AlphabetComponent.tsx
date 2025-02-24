@@ -2,6 +2,7 @@ import { AlphabetLetter } from "../App"
 
 export default function AlphabetComponent(props: {
   alphabetLetters: Array<AlphabetLetter>
+  fade: string | null
   onClick: (alphabetLetter: AlphabetLetter) => void
 }) {
   const alphabetElements = props.alphabetLetters.map(alphabetLetter => {
@@ -19,5 +20,9 @@ export default function AlphabetComponent(props: {
     )
   })
 
-  return <div className="alphabetContainer">{alphabetElements}</div>
+  return (
+    <div className={"alphabetContainer" + (props.fade ? " fade" : "")}>
+      {alphabetElements}
+    </div>
+  )
 }

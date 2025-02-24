@@ -117,10 +117,10 @@ export default function App() {
   )
 
   const endgameReached = alphabetLetters.every(
-      alphabetLetter =>
-        !alphabetLetter.inRandomWord ||
-        (alphabetLetter.inRandomWord && alphabetLetter.selected)
-    )
+    alphabetLetter =>
+      !alphabetLetter.inRandomWord ||
+      (alphabetLetter.inRandomWord && alphabetLetter.selected)
+  )
     ? "victory"
     : snappedLanguages === 8
     ? "loss"
@@ -179,6 +179,7 @@ export default function App() {
         <RandomWord randomWord={randomWord} alphabetLetters={alphabetLetters} />
         <AlphabetComponent
           alphabetLetters={alphabetLetters}
+          fade={endgameReached}
           onClick={handleAlphabetLetterClick}
         />
       </main>

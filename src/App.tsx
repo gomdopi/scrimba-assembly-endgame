@@ -176,7 +176,11 @@ export default function App() {
       </header>
       <main>
         <Languages languagesState={languagesState} />
-        <RandomWord randomWord={randomWord} alphabetLetters={alphabetLetters} />
+        <RandomWord
+          randomWord={randomWord}
+          alphabetLetters={alphabetLetters}
+          endgameReached={endgameReached}
+        />
         <AlphabetComponent
           alphabetLetters={alphabetLetters}
           fade={endgameReached}

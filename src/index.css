@@ -190,6 +190,11 @@ body {
           &.show {
             visibility: visible;
           }
+
+          &.missed {
+            visibility: visible;
+            color: #ec5d49;
+          }
         }
       }
     }

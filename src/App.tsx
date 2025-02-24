@@ -5,6 +5,7 @@ import GameTitle from "./components/GameTitle"
 import Languages from "./components/Languages"
 import RandomWord from "./components/RandomWord"
 import { generate } from "random-words"
+import * as data from "./assets/data"
 
 export class AlphabetLetter {
   letter: string
@@ -19,34 +20,7 @@ export class AlphabetLetter {
 }
 
 export class Alphabet {
-  static alphabetLetters = [
-    "A",
-    "B",
-    "C",
-    "D",
-    "E",
-    "F",
-    "G",
-    "H",
-    "I",
-    "J",
-    "K",
-    "L",
-    "M",
-    "N",
-    "O",
-    "P",
-    "Q",
-    "R",
-    "S",
-    "T",
-    "U",
-    "V",
-    "W",
-    "X",
-    "Y",
-    "Z",
-  ] as const
+  static alphabetLetters: Array<string> = data.alphabetLetters
 
   letters: Array<AlphabetLetter>
 
@@ -57,49 +31,7 @@ export class Alphabet {
   }
 }
 
-export type Language = {
-  language: string
-  snapped: boolean
-}
-
-const initialLanguages: Array<Language> = [
-  {
-    language: "HTML",
-    snapped: false,
-  },
-  {
-    language: "CSS",
-    snapped: false,
-  },
-  {
-    language: "Javascript",
-    snapped: false,
-  },
-  {
-    language: "React",
-    snapped: false,
-  },
-  {
-    language: "Typescript",
-    snapped: false,
-  },
-  {
-    language: "Node.js",
-    snapped: false,
-  },
-  {
-    language: "Python",
-    snapped: false,
-  },
-  {
-    language: "Ruby",
-    snapped: false,
-  },
-  {
-    language: "Assembly",
-    snapped: false,
-  },
-]
+const initialLanguages: Array<data.Language> = data.languages
 
 function initializeAlphabet(randomWord: string): Array<AlphabetLetter> {
   return new Alphabet(randomWord).letters
@@ -158,7 +90,7 @@ export default function App() {
       setGameMessage("")
     } else {
       const newSnappedLanguages = snappedLanguages + 1
-      setGameMessage(languagesState[snappedLanguages].language)
+      setGameMessage(languagesState[snappedLanguages].name)
       setSnappedLanguages(newSnappedLanguages)
       setLanguagesState(prevLanguagesState =>
         prevLanguagesState.map((language, index) =>

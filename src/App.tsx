@@ -116,18 +116,20 @@ export default function App() {
     initializeAlphabet(randomWord)
   )
 
-  const endgameReached =
-    snappedLanguages === 8 ||
-    alphabetLetters.every(
+  const endgameReached = alphabetLetters.every(
       alphabetLetter =>
         !alphabetLetter.inRandomWord ||
         (alphabetLetter.inRandomWord && alphabetLetter.selected)
     )
+    ? "victory"
+    : snappedLanguages === 8
+    ? "loss"
+    : null
 
   const newGameButtonRef: RefObject<HTMLButtonElement | null> = useRef(null)
   useEffect(() => {
     if (endgameReached) {
-      setGameMessage(snappedLanguages === 8 ? "loss" : "victory")
+      setGameMessage(endgameReached)
       newGameButtonRef.current!.focus()
     }
   }, [endgameReached])

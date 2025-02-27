@@ -10,10 +10,10 @@ export default function AlphabetComponent(props: {
     <button
       key={alphabetLetter.letter}
       onClick={() => props.onClick(alphabetLetter)}
-      className={clsx(
-        alphabetLetter.inCurrentWord && "inCurrentWord",
-        alphabetLetter.selected && "selected"
-      )}
+      className={clsx({
+        inCurrentWord: alphabetLetter.inCurrentWord,
+        selected: alphabetLetter.selected,
+      })}
     >
       {alphabetLetter.letter}
     </button>

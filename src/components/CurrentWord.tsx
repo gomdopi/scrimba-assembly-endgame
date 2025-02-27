@@ -13,12 +13,12 @@ export default function CurrentWord(props: {
     return (
       <div key={index} className="letter">
         <span
-          className={clsx(
-            props.alphabetLetters[letterIndex].selected && "show",
-            !props.alphabetLetters[letterIndex].selected &&
-              props.endgameReached === "loss" &&
-              "missed"
-          )}
+          className={clsx({
+            show: props.alphabetLetters[letterIndex].selected,
+            missed:
+              !props.alphabetLetters[letterIndex].selected &&
+              props.endgameReached === "loss",
+          })}
         >
           {letter}
         </span>

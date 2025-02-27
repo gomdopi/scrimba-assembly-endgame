@@ -30,11 +30,11 @@ export default function GameMessage(props: { gameMessage: string }) {
 
   return (
     <div
-      className={`${
+      className={
         languageMessage.length === 0
           ? "hide"
           : `gameMessage-${props.gameMessage}`
-      }`}
+      }
     >
       {generateMessage()}
     </div>

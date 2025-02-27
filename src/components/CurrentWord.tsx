@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { AlphabetLetter } from "../App"
 
 export default function CurrentWord(props: {
@@ -12,13 +13,12 @@ export default function CurrentWord(props: {
     return (
       <div key={index} className="letter">
         <span
-          className={
-            (props.alphabetLetters[letterIndex].selected ? "show" : "") +
-            (!props.alphabetLetters[letterIndex].selected &&
-            props.endgameReached === "loss"
-              ? " missed"
-              : "")
-          }
+          className={clsx(
+            props.alphabetLetters[letterIndex].selected && "show",
+            !props.alphabetLetters[letterIndex].selected &&
+              props.endgameReached === "loss" &&
+              "missed"
+          )}
         >
           {letter}
         </span>

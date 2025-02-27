@@ -6,6 +6,7 @@ import Languages from "./components/Languages"
 import CurrentWord from "./components/CurrentWord"
 import { generate } from "random-words"
 import * as data from "./assets/data"
+import clsx from "clsx"
 
 export class AlphabetLetter {
   letter: string
@@ -121,7 +122,7 @@ export default function App() {
       </main>
       <button
         ref={newGameButtonRef}
-        className={"newGameButton" + (endgameReached ? " show" : "")}
+        className={clsx("newGameButton", endgameReached && "show")}
         onClick={handleNewGameClick}
       >
         New Game

@@ -9,18 +9,17 @@ export default function CurrentWord(props: {
   const currentWordArr = props.currentWord.split("")
   const currentWordElements = currentWordArr.map((letter, index) => {
     const letterIndex = letter.charCodeAt(0) - "A".charCodeAt(0)
+    const letterIsSelected = props.alphabetLetters[letterIndex].selected
 
     return (
       <div key={index} className="letter">
         <span
           className={clsx({
-            show: props.alphabetLetters[letterIndex].selected,
-            missed:
-              !props.alphabetLetters[letterIndex].selected &&
-              props.endgameReached === "loss",
+            show: letterIsSelected,
+            missed: !letterIsSelected && props.endgameReached === "loss",
           })}
         >
-          {letter}
+          {letterIsSelected || props.endgameReached ? letter : ""}
         </span>
       </div>
     )

@@ -94,32 +94,25 @@ body {
       min-width: 160px;
       max-width: 300px;
 
-      div {
-        display: flex;
+      span {
         position: relative;
+        display: flex;
+        padding: 4.5px;
+        border-radius: 3px;
+        font-weight: 700;
+        font-size: 0.75rem;
 
-        span {
-          padding: 4.5px;
-          border-radius: 3px;
-          font-weight: 700;
-          font-size: 0.75rem;
-
-          &.snapped {
-            opacity: 0.1;
-          }
-
-          &.snappedIcon {
-            display: none;
-            position: absolute;
-            top: calc(50% - 12px);
-            left: calc(50% - 12px);
-            width: 12px;
-            height: 12px;
-
-            &.show {
-              display: block;
-            }
-          }
+        &.snapped::before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          content: "💀";
+          background-color: rgba(0, 0, 0, 0.7);
         }
       }
     }

@@ -55,7 +55,7 @@ export default function App() {
       (alphabetLetter.inCurrentWord && alphabetLetter.selected)
   )
     ? "victory"
-    : snappedLanguages === 8
+    : snappedLanguages >= data.languages.length - 1
     ? "loss"
     : null
 

@@ -3,18 +3,18 @@ import AlphabetComponent from "./components/AlphabetComponent"
 import GameMessage from "./components/GameMessage"
 import GameTitle from "./components/GameTitle"
 import Languages from "./components/Languages"
-import RandomWord from "./components/RandomWord"
+import CurrentWord from "./components/CurrentWord"
 import { generate } from "random-words"
 import * as data from "./assets/data"
 
 export class AlphabetLetter {
   letter: string
-  inRandomWord: boolean
+  inCurrentWord: boolean
   selected: boolean
 
-  constructor(letter: string, inRandomWord: boolean) {
+  constructor(letter: string, inCurrentWord: boolean) {
     this.letter = letter
-    this.inRandomWord = inRandomWord
+    this.inCurrentWord = inCurrentWord
     this.selected = false
   }
 }
@@ -24,34 +24,34 @@ export class Alphabet {
 
   letters: Array<AlphabetLetter>
 
-  constructor(randomWord: string) {
+  constructor(currentWord: string) {
     this.letters = Alphabet.alphabetLetters.map(
-      letter => new AlphabetLetter(letter, randomWord.includes(letter))
+      letter => new AlphabetLetter(letter, currentWord.includes(letter))
     )
   }
 }
 
 const initialLanguages: Array<data.Language> = data.languages
 
-function initializeAlphabet(randomWord: string): Array<AlphabetLetter> {
-  return new Alphabet(randomWord).letters
+function initializeAlphabet(currentWord: string): Array<AlphabetLetter> {
+  return new Alphabet(currentWord).letters
 }
 
 export default function App() {
   const [gameMessage, setGameMessage] = useState("")
   const [snappedLanguages, setSnappedLanguages] = useState(0)
   const [languagesState, setLanguagesState] = useState(initialLanguages)
-  const [randomWord, setRandomWord] = useState(
+  const [currentWord, setCurrentWord] = useState(
     generate({ exactly: 1, join: "" }).toUpperCase()
   )
   const [alphabetLetters, setAlphabetLetters] = useState(
-    initializeAlphabet(randomWord)
+    initializeAlphabet(currentWord)
   )
 
   const endgameReached = alphabetLetters.every(
     alphabetLetter =>
-      !alphabetLetter.inRandomWord ||
-      (alphabetLetter.inRandomWord && alphabetLetter.selected)
+      !alphabetLetter.inCurrentWord ||
+      (alphabetLetter.inCurrentWord && alphabetLetter.selected)
   )
     ? "victory"
     : snappedLanguages === 8
@@ -67,12 +67,12 @@ export default function App() {
   }, [endgameReached])
 
   const handleNewGameClick = (): void => {
-    const newRandomWord = generate({ exactly: 1, join: "" }).toUpperCase()
+    const newWord = generate({ exactly: 1, join: "" }).toUpperCase()
     setGameMessage("")
     setSnappedLanguages(0)
     setLanguagesState(initialLanguages)
-    setRandomWord(newRandomWord)
-    setAlphabetLetters(initializeAlphabet(newRandomWord))
+    setCurrentWord(newWord)
+    setAlphabetLetters(initializeAlphabet(newWord))
   }
 
   const handleAlphabetLetterClick = (alphabetLetter: AlphabetLetter): void => {
@@ -86,7 +86,7 @@ export default function App() {
       )
     )
 
-    if (randomWord.includes(alphabetLetter.letter)) {
+    if (currentWord.includes(alphabetLetter.letter)) {
       setGameMessage("")
     } else {
       const newSnappedLanguages = snappedLanguages + 1
@@ -108,8 +108,8 @@ export default function App() {
       </header>
       <main>
         <Languages languagesState={languagesState} />
-        <RandomWord
-          randomWord={randomWord}
+        <CurrentWord
+          currentWord={currentWord}
           alphabetLetters={alphabetLetters}
           endgameReached={endgameReached}
         />

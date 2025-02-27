@@ -1,12 +1,12 @@
 import { AlphabetLetter } from "../App"
 
-export default function RandomWord(props: {
-  randomWord: string
+export default function CurrentWord(props: {
+  currentWord: string
   alphabetLetters: Array<AlphabetLetter>
   endgameReached: string | null
 }) {
-  const randomWordArr = props.randomWord.split("")
-  const randomWordElements = randomWordArr.map((letter, index) => {
+  const currentWordArr = props.currentWord.split("")
+  const currentWordElements = currentWordArr.map((letter, index) => {
     const letterIndex = letter.charCodeAt(0) - "A".charCodeAt(0)
 
     return (
@@ -25,5 +25,5 @@ export default function RandomWord(props: {
       </div>
     )
   })
-  return <div className="randomWordContainer">{randomWordElements}</div>
+  return <div className="currentWordContainer">{currentWordElements}</div>
 }

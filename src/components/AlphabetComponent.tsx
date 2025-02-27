@@ -6,7 +6,7 @@ export default function AlphabetComponent(props: {
   onClick: (alphabetLetter: AlphabetLetter) => void
 }) {
   const alphabetElements = props.alphabetLetters.map(alphabetLetter => {
-    let className = alphabetLetter.inRandomWord ? "inRandomWord" : ""
+    let className = alphabetLetter.inCurrentWord ? "inCurrentWord" : ""
     if (alphabetLetter.selected) className += " selected"
 
     return (

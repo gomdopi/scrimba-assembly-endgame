@@ -124,7 +124,7 @@ body {
       }
     }
 
-    .randomWordContainer {
+    .currentWordContainer {
       display: flex;
       gap: 2px;
 
@@ -177,7 +177,7 @@ body {
         &.selected {
           background-color: #ec5d49;
 
-          &.inRandomWord {
+          &.inCurrentWord {
             background-color: #10a95b;
           }
         }

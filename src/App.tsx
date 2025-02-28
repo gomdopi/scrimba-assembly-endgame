@@ -1,12 +1,13 @@
+import clsx from "clsx"
+import { generate } from "random-words"
 import { RefObject, useEffect, useRef, useState } from "react"
+import ReactConfetti from "react-confetti"
+import * as data from "./assets/data"
 import AlphabetComponent from "./components/AlphabetComponent"
+import CurrentWord from "./components/CurrentWord"
 import GameMessage from "./components/GameMessage"
 import GameTitle from "./components/GameTitle"
 import Languages from "./components/Languages"
-import CurrentWord from "./components/CurrentWord"
-import { generate } from "random-words"
-import * as data from "./assets/data"
-import clsx from "clsx"
 
 export class AlphabetLetter {
   letter: string
@@ -42,10 +43,10 @@ export default function App() {
   const [gameMessage, setGameMessage] = useState("")
   const [snappedLanguages, setSnappedLanguages] = useState(0)
   const [languagesState, setLanguagesState] = useState(initialLanguages)
-  const [currentWord, setCurrentWord] = useState(
+  const [currentWord, setCurrentWord] = useState(() =>
     generate({ exactly: 1, join: "" }).toUpperCase()
   )
-  const [alphabetLetters, setAlphabetLetters] = useState(
+  const [alphabetLetters, setAlphabetLetters] = useState(() =>
     initializeAlphabet(currentWord)
   )
 
@@ -66,6 +67,16 @@ export default function App() {
       newGameButtonRef.current!.focus()
     }
   }, [endgameReached])
+  const rootRef = useRef(document.getElementById("root"))
+  const confettiSourceXOffset =
+    window.innerWidth / 2 - rootRef.current!.clientWidth / 2
+  console.log(confettiSourceXOffset)
+  const confettiSource = {
+    x: confettiSourceXOffset,
+    y: 0,
+    w: rootRef.current!.clientWidth,
+    h: 0,
+  }
 
   const handleNewGameClick = (): void => {
     const newWord = generate({ exactly: 1, join: "" }).toUpperCase()
@@ -101,6 +112,13 @@ export default function App() {
 
   return (
     <>
+      {endgameReached === "victory" && (
+        <ReactConfetti
+          width={rootRef.current!.clientWidth + confettiSourceXOffset + 50}
+          height={rootRef.current?.clientHeight}
+          confettiSource={confettiSource}
+        />
+      )}
       <header>
         <GameTitle />
         <GameMessage gameMessage={gameMessage} />

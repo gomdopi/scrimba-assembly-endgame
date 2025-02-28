@@ -3,8 +3,11 @@
 }
 
 body {
+  display: flex;
+  justify-content: center;
   font-family: Hanken Grotesk, sans-serif;
   margin: 0;
+  padding: 10px;
 }
 
 #root {

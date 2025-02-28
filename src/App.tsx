@@ -67,16 +67,6 @@ export default function App() {
       newGameButtonRef.current!.focus()
     }
   }, [endgameReached])
-  const rootRef = useRef(document.getElementById("root"))
-  const confettiSourceXOffset =
-    window.innerWidth / 2 - rootRef.current!.clientWidth / 2
-  console.log(confettiSourceXOffset)
-  const confettiSource = {
-    x: confettiSourceXOffset,
-    y: 0,
-    w: rootRef.current!.clientWidth,
-    h: 0,
-  }
 
   const handleNewGameClick = (): void => {
     const newWord = generate({ exactly: 1, join: "" }).toUpperCase()
@@ -113,11 +103,7 @@ export default function App() {
   return (
     <>
       {endgameReached === "victory" && (
-        <ReactConfetti
-          width={rootRef.current!.clientWidth + confettiSourceXOffset + 50}
-          height={rootRef.current?.clientHeight}
-          confettiSource={confettiSource}
-        />
+        <ReactConfetti recycle={false} numberOfPieces={1000} />
       )}
       <header>
         <GameTitle />

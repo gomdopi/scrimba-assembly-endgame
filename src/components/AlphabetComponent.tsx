@@ -14,6 +14,7 @@ export default function AlphabetComponent(props: {
         inCurrentWord: alphabetLetter.inCurrentWord,
         selected: alphabetLetter.selected,
       })}
+      disabled={props.fade != null || alphabetLetter.selected}
     >
       {alphabetLetter.letter}
     </button>

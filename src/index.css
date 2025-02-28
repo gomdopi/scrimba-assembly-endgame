@@ -167,6 +167,10 @@ body {
             background-color: #10a95b;
           }
         }
+
+        &:disabled {
+          cursor: not-allowed;
+        }
       }
 
       &.fade {

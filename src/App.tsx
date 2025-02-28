@@ -77,8 +77,6 @@ export default function App() {
   }
 
   const handleAlphabetLetterClick = (alphabetLetter: AlphabetLetter): void => {
-    if (alphabetLetter.selected || endgameReached) return
-
     setAlphabetLetters(prevAlphabetLetters =>
       prevAlphabetLetters.map(currAlphabetLetter =>
         currAlphabetLetter.letter === alphabetLetter.letter

@@ -15,6 +15,8 @@ export default function AlphabetComponent(props: {
         selected: alphabetLetter.selected,
       })}
       disabled={props.fade != null || alphabetLetter.selected}
+      aria-label={`Letter ${alphabetLetter.letter}`}
+      aria-disabled={props.fade != null || alphabetLetter.selected}
     >
       {alphabetLetter.letter}
     </button>

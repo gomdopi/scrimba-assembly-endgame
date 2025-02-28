@@ -24,5 +24,23 @@ export default function CurrentWord(props: {
       </div>
     )
   })
-  return <div className="currentWordContainer">{currentWordElements}</div>
+  const currentWordForSr = currentWordArr
+    .map(letter => {
+      const letterIndex = letter.charCodeAt(0) - "A".charCodeAt(0)
+      const letterIsSelected = props.alphabetLetters[letterIndex].selected
+
+      return letterIsSelected
+        ? props.alphabetLetters[letterIndex].letter + "."
+        : "blank."
+    })
+    .join(" ")
+
+  return (
+    <>
+      <section className="currentWordContainer">{currentWordElements}</section>
+      <section aria-live="polite" role="status" className="sr-only">
+        <p>Current word: {currentWordForSr}</p>
+      </section>
+    </>
+  )
 }

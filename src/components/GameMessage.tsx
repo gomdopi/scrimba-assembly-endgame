@@ -31,13 +31,15 @@ export default function GameMessage(props: { gameMessage: string }) {
   }
 
   return (
-    <div
+    <section
+      aria-live="polite"
+      role="status"
       className={clsx(
         `gameMessage-${props.gameMessage}`,
         farewellMessage.length === 0 && "hide"
       )}
     >
       {generateMessage()}
-    </div>
+    </section>
   )
 }

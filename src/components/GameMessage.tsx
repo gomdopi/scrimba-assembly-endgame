@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { getFarewellText } from "../utils"
 
 export default function GameMessage(props: { gameMessage: string }) {
@@ -31,11 +32,10 @@ export default function GameMessage(props: { gameMessage: string }) {
 
   return (
     <div
-      className={
-        farewellMessage.length === 0
-          ? "hide"
-          : `gameMessage-${props.gameMessage}`
-      }
+      className={clsx(
+        `gameMessage-${props.gameMessage}`,
+        farewellMessage.length === 0 && "hide"
+      )}
     >
       {generateMessage()}
     </div>

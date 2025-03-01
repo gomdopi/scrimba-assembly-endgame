@@ -40,6 +40,7 @@ function initializeAlphabet(currentWord: string): Array<AlphabetLetter> {
 }
 
 export default function App() {
+  // State
   const [gameMessage, setGameMessage] = useState("")
   const [snappedLanguages, setSnappedLanguages] = useState(0)
   const [languagesState, setLanguagesState] = useState(initialLanguages)
@@ -49,7 +50,9 @@ export default function App() {
   const [alphabetLetters, setAlphabetLetters] = useState(() =>
     initializeAlphabet(currentWord)
   )
+  const [time, setTime] = useState(0)
 
+  // Derived
   const endgameReached = alphabetLetters.every(
     alphabetLetter =>
       !alphabetLetter.inCurrentWord ||
@@ -59,14 +62,30 @@ export default function App() {
     : snappedLanguages >= data.languages.length - 1
     ? "loss"
     : null
+  const startedGame = alphabetLetters.some(letter => letter.selected)
 
   const newGameButtonRef: RefObject<HTMLButtonElement | null> = useRef(null)
+
   useEffect(() => {
     if (endgameReached) {
+      clearInterval(interval.current)
       setGameMessage(endgameReached)
       newGameButtonRef.current!.focus()
     }
   }, [endgameReached])
+
+  const interval = useRef(0)
+  useEffect(() => {
+    console.log(interval.current)
+    if (startedGame && interval.current === 0) {
+      interval.current = setInterval(
+        () => setTime(prevTime => prevTime + 1),
+        1000
+      )
+    }
+
+    return () => clearInterval(interval.current)
+  }, [startedGame])
 
   const handleNewGameClick = (): void => {
     const newWord = generate({ exactly: 1, join: "" }).toUpperCase()
@@ -75,6 +94,8 @@ export default function App() {
     setLanguagesState(initialLanguages)
     setCurrentWord(newWord)
     setAlphabetLetters(initializeAlphabet(newWord))
+    setTime(0)
+    interval.current = 0
   }
 
   const handleAlphabetLetterClick = (alphabetLetter: AlphabetLetter): void => {
@@ -122,13 +143,23 @@ export default function App() {
           onClick={handleAlphabetLetterClick}
         />
       </main>
-      <button
-        ref={newGameButtonRef}
-        className={clsx("newGameButton", endgameReached && "show")}
-        onClick={handleNewGameClick}
-      >
-        New Game
-      </button>
+      <footer>
+        <div className="remaining-guesses">
+          <p>Remaining guesses:</p>
+          <span>{initialLanguages.length - snappedLanguages - 1}</span>
+        </div>
+        <button
+          ref={newGameButtonRef}
+          className={clsx("newGameButton", endgameReached && "show")}
+          onClick={handleNewGameClick}
+        >
+          New Game
+        </button>
+        <div className="timer">
+          <p>Timer:</p>
+          <span>{time}</span>
+        </div>
+      </footer>
     </>
   )
 }

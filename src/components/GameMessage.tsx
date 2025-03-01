@@ -1,7 +1,8 @@
 import clsx from "clsx"
 import { getFarewellText } from "../utils"
+import { memo } from "react"
 
-export default function GameMessage(props: { gameMessage: string }) {
+function GameMessage(props: { gameMessage: string }) {
   const capitalizedLanguage =
     props.gameMessage.length > 0
       ? props.gameMessage[0] + props.gameMessage.slice(1)
@@ -43,3 +44,5 @@ export default function GameMessage(props: { gameMessage: string }) {
     </section>
   )
 }
+
+export default memo(GameMessage)

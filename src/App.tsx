@@ -35,6 +35,9 @@ export class Alphabet {
 
 const initialLanguages: Array<data.Language> = data.languages
 
+const timeLimit = 30
+const intervalStart = 0
+
 function initializeAlphabet(currentWord: string): Array<AlphabetLetter> {
   return new Alphabet(currentWord).letters
 }
@@ -50,7 +53,7 @@ export default function App() {
   const [alphabetLetters, setAlphabetLetters] = useState(() =>
     initializeAlphabet(currentWord)
   )
-  const [time, setTime] = useState(0)
+  const [time, setTime] = useState(timeLimit)
 
   // Derived
   const endgameReached = alphabetLetters.every(
@@ -67,6 +70,19 @@ export default function App() {
   const newGameButtonRef: RefObject<HTMLButtonElement | null> = useRef(null)
 
   useEffect(() => {
+    if (time === 0) {
+      setSnappedLanguages(8)
+      setLanguagesState(prevLanguagesState =>
+        prevLanguagesState.map(language =>
+          language.name.toLowerCase() === "assembly"
+            ? language
+            : { ...language, snapped: true }
+        )
+      )
+    }
+  }, [time])
+
+  useEffect(() => {
     if (endgameReached) {
       clearInterval(interval.current)
       setGameMessage(endgameReached)
@@ -76,10 +92,9 @@ export default function App() {
 
   const interval = useRef(0)
   useEffect(() => {
-    console.log(interval.current)
-    if (startedGame && interval.current === 0) {
+    if (startedGame && interval.current === intervalStart) {
       interval.current = setInterval(
-        () => setTime(prevTime => prevTime + 1),
+        () => setTime(prevTime => prevTime - 1),
         1000
       )
     }
@@ -94,8 +109,8 @@ export default function App() {
     setLanguagesState(initialLanguages)
     setCurrentWord(newWord)
     setAlphabetLetters(initializeAlphabet(newWord))
-    setTime(0)
-    interval.current = 0
+    setTime(timeLimit)
+    interval.current = intervalStart
   }
 
   const handleAlphabetLetterClick = (alphabetLetter: AlphabetLetter): void => {

@@ -82,11 +82,20 @@ export default function App() {
     }
   }, [time])
 
+  const showExplosions = useRef(false)
   useEffect(() => {
     if (endgameReached) {
       clearInterval(interval.current)
       setGameMessage(endgameReached)
       newGameButtonRef.current!.focus()
+
+      if (endgameReached === "loss") {
+        showExplosions.current = true
+        setTimeout(() => {
+          showExplosions.current = false
+          setLanguagesState(prevLanguagesState => [...prevLanguagesState])
+        }, 3000)
+      }
     }
   }, [endgameReached])
 
@@ -138,6 +147,28 @@ export default function App() {
 
   return (
     <>
+      {showExplosions.current && (
+        <ReactConfetti
+          recycle={false}
+          colors={["red"]}
+          drawShape={ctx => {
+            ctx.arc(0, 0, 25, 0, Math.PI * 2)
+            ctx.fill()
+          }}
+          confettiSource={{
+            x: 0,
+            y: 0,
+            w: window.innerWidth,
+            h: window.innerHeight,
+          }}
+          wind={0}
+          gravity={0}
+          initialVelocityX={0}
+          initialVelocityY={0}
+          tweenDuration={3000}
+          onConfettiComplete={() => console.log("done")}
+        />
+      )}
       {endgameReached === "victory" && (
         <ReactConfetti recycle={false} numberOfPieces={1000} />
       )}
